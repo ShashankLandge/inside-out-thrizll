@@ -1,0 +1,109 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ReqStatus {
+  pending
+  accepted
+  rejected
+  cancelled
+}
+
+enum RoomTier {
+  tier1
+  tier2
+  tier3
+}
+
+enum TierReqStatus {
+  pending
+  approved
+  rejected
+  applied
+}
+
+model User {
+  id           String        @id @default(uuid())
+  name         String
+  age          Int?
+  location     String?
+  email        String?       @unique
+  passwordHash String?
+  createdAt    DateTime      @default(now())
+  profile Json?   // flexible JSON object for preferences, religion, other optional fields
+
+
+  sentRequests     UserRequest[] @relation("sentRequests")
+  receivedRequests UserRequest[] @relation("receivedRequests")
+  rooms            RoomMember[]
+  createdRooms     Room[]        @relation("RoomsCreatedByUser")
+  messages         Message[]     @relation("userMessages")
+  tierRequests     TierRequest[] @relation("userTierRequests")
+}
+
+model UserRequest {
+  id         String    @id @default(uuid())
+  fromUser   User      @relation("sentRequests", fields: [fromUserId], references: [id])
+  fromUserId String
+  toUser     User      @relation("receivedRequests", fields: [toUserId], references: [id])
+  toUserId   String
+  status     ReqStatus @default(pending)
+  createdAt  DateTime  @default(now())
+
+  @@unique([fromUserId, toUserId])
+  @@index([toUserId])
+}
+
+model Room {
+  id          String        @id @default(uuid())
+  createdBy   User?         @relation("RoomsCreatedByUser", fields: [createdById], references: [id])
+  createdById String?
+  tier        RoomTier      @default(tier1)
+  createdAt   DateTime      @default(now())
+
+  members     RoomMember[]
+  messages    Message[]
+  tierRequests TierRequest[]
+}
+
+model RoomMember {
+  room      Room   @relation(fields: [roomId], references: [id])
+  roomId    String
+  user      User   @relation(fields: [userId], references: [id])
+  userId    String
+  joinedAt  DateTime @default(now())
+
+  @@id([roomId, userId])
+  @@index([userId])
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  room      Room     @relation(fields: [roomId], references: [id])
+  roomId    String
+  sender    User?    @relation("userMessages", fields: [senderId], references: [id])
+  senderId  String?
+  text      String
+  createdAt DateTime @default(now())
+
+  @@index([roomId, createdAt])
+}
+
+model TierRequest {
+  id             String        @id @default(uuid())
+  room           Room          @relation(fields: [roomId], references: [id])
+  roomId         String
+  requestedBy    User          @relation("userTierRequests", fields: [requestedById], references: [id])
+  requestedById  String
+  requestedTier  RoomTier 
+  status         TierReqStatus @default(pending)
+  createdAt      DateTime      @default(now())
+
+  @@index([roomId])
+}
+
