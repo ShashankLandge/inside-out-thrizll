@@ -16,6 +16,7 @@ requestsRouter.post("/", createRequest);
 requestsRouter.get("/", async (req: AuthedRequest, res) => {
   const userId = req.userId!;
   const incoming = req.query.incoming === "true";
+
   const where = incoming
     ? { toUserId: userId, status: ReqStatus.pending }
     : { fromUserId: userId };

@@ -6,6 +6,7 @@ import Users from "./pages/Users";
 import Profile from "./pages/Profile";
 import Chats from "./pages/Chats";
 import ChatRoom from "./pages/ChatRoom";
+import GamesPage from "./games/Games";
 import { useAuth } from "./contexts/AuthContext";
 import Header from "./components/Header";
 
@@ -38,6 +39,10 @@ export default function App() {
           <Route
             path="/profile"
             element={user ? <Profile /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/onboard"
+            element={user ? <GamesPage /> : <Navigate to="/login" />}
           />
           '
         </Routes>
