@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,10 +8,121 @@ html,
 body,
 #root {
   height: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
-  @apply bg-gray-50 text-gray-800;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+  @apply bg-neutral text-dark;
+  font-family: "Poppins", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     Roboto, "Helvetica Neue", Arial;
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-full transition-all duration-300 font-medium text-sm;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary text-white hover:bg-opacity-90 shadow-soft;
+  }
+
+  .btn-secondary {
+    @apply btn bg-secondary text-dark hover:bg-opacity-90;
+  }
+
+  .btn-accent {
+    @apply btn bg-accent text-white hover:bg-opacity-90;
+  }
+
+  .btn-outline {
+    @apply btn border border-primary text-primary hover:bg-primary hover:text-white;
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-card p-4 transition-all duration-300 hover:shadow-lg;
+  }
+
+  .input {
+    @apply w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-dark mb-1;
+  }
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.slide-up {
+  animation: slideUp 0.5s ease-out;
+}
+
+.animate-scale {
+  animation: scale 0.5s ease-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scale {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
