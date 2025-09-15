@@ -620,7 +620,14 @@ export default function ChatRoom() {
     <div className="max-w-3xl mx-auto">
       <div className="bg-white p-4 rounded shadow mb-4 flex items-center justify-between">
         <div>
-          <div className="font-semibold">Chat Room</div>
+          <div className="font-semibold">
+            {(() => {
+              const other = room?.members?.find(
+                (m) => m.user && m.user.id !== user.id
+              );
+              return other ? other.user.name : "Unknown";
+            })()}
+          </div>
           <div className="text-sm text-gray-500">Tier: {room?.tier}</div>
         </div>
 
