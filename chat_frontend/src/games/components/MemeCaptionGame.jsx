@@ -66,26 +66,26 @@ export default function MemeCaptionGame({ onComplete }) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="p-6 border rounded-xl">
-        <h3 className="text-lg font-medium">Meme Caption — Humor Taste</h3>
-        <p className="text-sm text-gray-600 mt-2">Choose the caption you’d find funniest for each meme. This builds a lightweight humor profile.</p>
+      <div className="p-6 border rounded-xl animate-slide-in-left">
+        <h3 className="text-xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Meme Caption — Humor Taste</h3>
+        <p className="text-sm text-dark/80 mt-2">Choose the caption you'd find funniest for each meme. This builds a lightweight humor profile.</p>
 
-        <div className="mt-6">
+        <div className="mt-8">
           {index < templates.length && (
             <div>
-              <div className="rounded-xl overflow-hidden border">
-                <div className="p-4 bg-gray-50 flex items-center justify-between">
+              <div className="rounded-xl overflow-hidden border shadow-md">
+                <div className="p-4 bg-gradient-to-br from-neutral to-lavender/30 flex items-center justify-between">
                   <div className="text-sm font-medium">{templates[index].title}</div>
-                  <div className="text-xs text-gray-500">Template {index + 1} / {templates.length}</div>
+                  <div className="text-xs text-dark/70 bg-neutral/50 px-3 py-1 rounded-full">Template {index + 1} / {templates.length}</div>
                 </div>
-                <div className="p-4 bg-white">
+                <div className="p-4 bg-white animate-float">
                   {templates[index].visual()}
                 </div>
               </div>
 
-              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {optionsPool[templates[index].id].map(opt => (
-                  <button key={opt.text} onClick={() => choose(opt)} className="text-left p-3 border rounded-lg">
+                  <button key={opt.text} onClick={() => choose(opt)} className="text-left p-4 border border-lavender/50 rounded-xl hover:border-primary/50 hover:bg-neutral transition-all duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-1">
                     <div className="text-sm">{opt.text}</div>
                     <div className="text-xs text-gray-400 mt-1">{opt.type}</div>
                   </button>

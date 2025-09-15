@@ -1,4 +1,4 @@
-/* small optional animation */
+/* Modern animations for games */
 @keyframes pop {
   0% {
     transform: scale(1);
@@ -13,6 +13,106 @@
     opacity: 0;
   }
 }
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px 2px rgba(255, 182, 193, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px 5px rgba(255, 182, 193, 0.4);
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 .animate-pop {
   animation: pop 500ms ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.5s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.5s ease-out forwards;
+}
+
+/* Game card styling */
+.game-card {
+  @apply p-6 border rounded-xl transition-all duration-300;
+  background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(248,250,252,1) 100%);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.game-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+/* Game buttons */
+.game-btn {
+  @apply px-4 py-2 rounded-full transition-all duration-300 font-medium text-sm;
+  background: linear-gradient(135deg, #FFB6C1 0%, #FF7F50 100%);
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(255, 127, 80, 0.2), 0 2px 4px -1px rgba(255, 127, 80, 0.1);
+}
+
+.game-btn:hover {
+  box-shadow: 0 10px 15px -3px rgba(255, 127, 80, 0.3), 0 4px 6px -2px rgba(255, 127, 80, 0.2);
+  transform: translateY(-1px);
+}
+
+.game-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px -1px rgba(255, 127, 80, 0.2);
+}
+
+.game-btn-secondary {
+  @apply px-4 py-2 rounded-full transition-all duration-300 font-medium text-sm;
+  background: white;
+  color: #36454F;
+  border: 1px solid #E6E6FA;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.game-btn-secondary:hover {
+  background: #FAF9F6;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }

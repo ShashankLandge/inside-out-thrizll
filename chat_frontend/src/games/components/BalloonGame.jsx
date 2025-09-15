@@ -56,15 +56,15 @@ export default function BalloonGame({ onComplete }) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-      <div className="p-6 border rounded-xl">
-        <h3 className="text-lg font-medium">Balloon — Risk & Reward</h3>
-        <p className="text-sm text-gray-600 mt-2">Tap <span className="font-semibold">Pump</span> to inflate. Cash out before it pops to keep the reward.</p>
+      <div className="p-6 border rounded-xl animate-slide-in-left">
+        <h3 className="text-xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Balloon — Risk & Reward</h3>
+        <p className="text-sm text-dark/80 mt-2">Tap <span className="font-semibold">Pump</span> to inflate. Cash out before it pops to keep the reward.</p>
 
-        <div className="mt-6 flex flex-col items-center gap-4">
+        <div className="mt-8 flex flex-col items-center gap-4">
           {/* balloon visual area with fixed height to avoid overlap */}
           <div className="relative h-56 w-full flex items-center justify-center overflow-hidden">
             <div
-              className="rounded-full shadow-xl flex items-center justify-center transition-transform duration-200"
+              className="rounded-full shadow-xl flex items-center justify-center transition-transform duration-300 animate-float"
               style={{ width: `${120 * size}px`, height: `${140 * size}px`, background: `hsl(${hue} 80% 60%)`, maxWidth: '220px', maxHeight: '240px' }}>
               <div className="text-3xl select-none">🎈</div>
             </div>
@@ -73,16 +73,22 @@ export default function BalloonGame({ onComplete }) {
             )}
           </div>
 
-          <div className="flex gap-3">
-            <button onClick={pump} className="px-4 py-2 rounded-full bg-pink-500 text-white shadow" disabled={popped}>
-              Pump
+          <div className="flex gap-4 mt-2">
+            <button onClick={pump} className="game-btn flex items-center gap-2" disabled={popped}>
+              <span>Pump</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+              </svg>
             </button>
-            <button onClick={cashOut} className="px-4 py-2 rounded-full border" disabled={popped}>
-              Cash out
+            <button onClick={cashOut} className="game-btn-secondary flex items-center gap-2" disabled={popped}>
+              <span>Cash out</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
             </button>
           </div>
 
-          <div className="text-sm text-gray-600">Round {round + 1} of {ROUNDS} • Pumps: {pumps} {popped ? "(popped)" : ""}</div>
+          <div className="text-sm bg-neutral/50 px-4 py-2 rounded-full text-dark/80">Round {round + 1} of {ROUNDS} • Pumps: {pumps} {popped ? "(popped)" : ""}</div>
         </div>
       </div>
 

@@ -71,31 +71,31 @@ export default function FacesGame({ onComplete }) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="p-6 border rounded-xl text-center">
-        <h3 className="text-lg font-medium">Faces — Emotional Perception</h3>
-        <p className="text-sm text-gray-600 mt-2">
+      <div className="game-card animate-slide-in-left">
+        <h3 className="text-xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Faces — Emotional Perception</h3>
+        <p className="text-sm text-dark/80 mt-2">
           Pick the emotion that best matches the face. React quickly but
           thoughtfully.
         </p>
 
-        <div className="mt-6 flex flex-col items-center gap-4">
-          <div className="text-6xl p-8 rounded-xl border w-48 h-48 flex items-center justify-center bg-white">
+        <div className="mt-8 flex flex-col items-center gap-4">
+          <div className="text-7xl p-8 rounded-xl border w-48 h-48 flex items-center justify-center bg-white animate-float">
             {current?.face?.emoji ?? "🙂"}
           </div>
 
-          <div className="grid grid-cols-2 gap-3 w-full">
+          <div className="grid grid-cols-2 gap-3 w-full max-w-md">
             {current?.options?.map((opt) => (
               <button
                 key={opt.label}
                 onClick={() => choose(opt)}
-                className="py-2 px-3 rounded-lg border text-sm"
+                className="px-5 py-3 rounded-xl bg-gradient-to-r from-secondary/70 to-lavender/70 hover:from-secondary hover:to-lavender transition-all duration-300 transform hover:-translate-y-1 shadow-sm hover:shadow-md"
               >
                 {opt.label}
               </button>
             ))}
           </div>
 
-          <div className="text-sm text-gray-600">
+          <div className="mt-6 text-sm bg-neutral/50 px-4 py-2 rounded-full text-dark/80">
             Trial {Math.min(trialIndex + 1, TRIALS)} / {TRIALS}
           </div>
         </div>

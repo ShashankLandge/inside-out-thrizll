@@ -85,9 +85,9 @@ export default function ArrowGame({ onComplete }) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="p-6 border rounded-xl flex flex-col items-center">
-        <h3 className="text-lg font-medium">Arrow — Attention & Speed</h3>
-        <p className="text-sm text-gray-600 mt-2">
+      <div className="p-6 border rounded-xl flex flex-col items-center animate-slide-in-left">
+        <h3 className="text-lg font-medium text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Arrow — Attention & Speed</h3>
+        <p className="text-sm text-dark/80 mt-2">
           Press the LEFT / RIGHT / UP / DOWN arrow key (or click the buttons) as
           quickly and accurately as you can when the arrow appears.
         </p>
@@ -95,9 +95,9 @@ export default function ArrowGame({ onComplete }) {
         <div className="mt-6 w-full flex flex-col items-center gap-4">
           <div className="h-40 w-full flex items-center justify-center">
             <div className="text-center">
-              {waiting && <div className="text-gray-400">Get ready...</div>}
+              {waiting && <div className="text-gray-400 animate-pulse">Get ready...</div>}
               {show && stimulus && (
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 animate-float">
                   <svg
                     width="100"
                     height="60"
@@ -107,6 +107,7 @@ export default function ArrowGame({ onComplete }) {
                       transform: arrowRotate(stimulus.dir),
                       color: "currentColor",
                     }}
+                    className="text-accent"
                   >
                     {/* Always draw a right-pointing arrow, rotate for direction */}
                     <polygon points="10,30 70,5 70,55" fill="currentColor" />
@@ -119,39 +120,39 @@ export default function ArrowGame({ onComplete }) {
           <div className="flex gap-3 flex-wrap justify-center">
             <button
               onClick={() => clickResponse("up")}
-              className="px-4 py-2 rounded-full border"
+              className="px-4 py-2 rounded-full bg-gradient-to-r from-secondary to-lavender hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
             >
               ↑ Up
             </button>
             <button
               onClick={() => clickResponse("left")}
-              className="px-4 py-2 rounded-full border"
+              className="px-4 py-2 rounded-full bg-gradient-to-r from-secondary to-lavender hover:shadow-lg transition-all duration-300 transform hover:-translate-x-1"
             >
               ← Left
             </button>
             <button
               onClick={() => clickResponse("right")}
-              className="px-4 py-2 rounded-full border"
+              className="px-4 py-2 rounded-full bg-gradient-to-r from-secondary to-lavender hover:shadow-lg transition-all duration-300 transform hover:translate-x-1"
             >
               Right →
             </button>
             <button
               onClick={() => clickResponse("down")}
-              className="px-4 py-2 rounded-full border"
+              className="px-4 py-2 rounded-full bg-gradient-to-r from-secondary to-lavender hover:shadow-lg transition-all duration-300 transform hover:translate-y-1"
             >
               ↓ Down
             </button>
           </div>
 
-          <div className="text-sm text-gray-600">
+          <div className="text-sm text-dark/60 bg-neutral/50 px-4 py-2 rounded-full">
             Trial {Math.min(trial + 1, TRIALS)} / {TRIALS}
           </div>
         </div>
       </div>
 
-      <div className="p-6 border rounded-xl">
-        <h4 className="text-md font-medium">What we measure</h4>
-        <ul className="mt-3 text-sm text-gray-600 space-y-2 list-disc list-inside">
+      <div className="p-6 border rounded-xl animate-slide-in-right">
+        <h4 className="text-md font-medium text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">What we measure</h4>
+        <ul className="mt-3 text-sm text-dark/80 space-y-2 list-disc list-inside">
           <li>
             Accuracy and reaction time — proxies for attention and cognitive
             speed.

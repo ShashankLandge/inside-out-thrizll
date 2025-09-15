@@ -79,86 +79,113 @@ export default function Results({ data, onReset, onFinish }) {
   };
 
   return (
-    <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="p-6 border rounded-xl">
-          <h3 className="text-lg font-medium">Your Quick Profile</h3>
-          <div className="mt-4 space-y-3">
+    <div className="py-8 animate-slide-in-left">
+      <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-love">Your Match Profile</h2>
+      <p className="mt-3 text-dark/80 max-w-2xl mx-auto">
+        Based on your gameplay, we've created a personality profile that helps
+        find compatible matches.
+      </p>
+
+      <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="game-card">
+          <h3 className="text-xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent mb-6">Personality Traits</h3>
+          <div className="space-y-6">
             <Stat
-              label="Risk tolerance"
-              value={`${profile.personality.riskTolerance}%`}
+              label="Risk Tolerance"
+              value={profile.personality.riskTolerance}
+              description="How comfortable you are with uncertainty and potential loss"
             />
             <Stat
               label="Impulsivity"
-              value={`${profile.personality.impulsivity}%`}
+              value={profile.personality.impulsivity}
+              description="How quickly you act without extensive deliberation"
             />
             <Stat
-              label="Attention"
-              value={`${profile.personality.attention}%`}
+              label="Attention to Detail"
+              value={profile.personality.attention}
+              description="How precisely you notice and respond to specific cues"
             />
             <Stat
-              label="Processing speed"
-              value={`${profile.personality.speed}%`}
+              label="Processing Speed"
+              value={profile.personality.speed}
+              description="How quickly you process and react to information"
             />
-            <Stat label="Empathy" value={`${profile.personality.empathy}%`} />
-          </div>
-
-          <div className="mt-6 flex gap-3">
-            <button
-              onClick={download}
-              className="px-4 py-2 rounded-full bg-indigo-600 text-white"
-            >
-              Download results
-            </button>
-            <button onClick={onReset} className="px-4 py-2 rounded-full border">
-              Start over
-            </button>
-            <button
-              onClick={handleFinish}
-              className="px-4 py-2 rounded-full bg-green-600 text-white"
-            >
-              Finish & Continue
-            </button>
+            <Stat
+              label="Emotional Intelligence"
+              value={profile.personality.empathy}
+              description="How well you recognize and respond to emotions"
+            />
           </div>
         </div>
 
-        <div className="p-6 border rounded-xl">
-          <h3 className="text-lg font-medium">Compatibility Snapshot</h3>
-          <div className="mt-4 space-y-3">
-            <Stat
-              label="Intellectual"
-              value={`${profile.compatibility.intellectual}%`}
-            />
-            <Stat
-              label="Emotional"
-              value={`${profile.compatibility.emotional}%`}
-            />
-            <Stat
-              label="Adventurous"
-              value={`${profile.compatibility.adventurous}%`}
-            />
+        <div className="space-y-8">
+          <div className="game-card">
+            <h3 className="text-xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent mb-6">Compatibility Factors</h3>
+            <div className="space-y-6">
+              <Stat
+                label="Intellectual Compatibility"
+                value={profile.compatibility.intellectual}
+                description="Shared cognitive styles and communication patterns"
+              />
+              <Stat
+                label="Emotional Compatibility"
+                value={profile.compatibility.emotional}
+                description="Alignment in emotional expression and understanding"
+              />
+              <Stat
+                label="Adventurous Compatibility"
+                value={profile.compatibility.adventurous}
+                description="Similar appetite for novelty and calculated risks"
+              />
+            </div>
           </div>
 
-          <div className="mt-6">
-            <h4 className="text-sm font-medium">Humour profile</h4>
-            <div className="mt-2 text-sm text-gray-700">
-              {Object.keys(profile.personality.humor).length ? (
-                <div className="flex gap-2 flex-wrap mt-2">
-                  {Object.entries(profile.personality.humor).map(([k, v]) => (
-                    <div
-                      key={k}
-                      className="px-3 py-1 rounded-full border text-xs"
-                    >
-                      {k}: {v}
+          <div className="game-card">
+            <h3 className="text-xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent mb-4">Humor Profile</h3>
+            <div className="text-sm text-dark/80">
+              <div className="grid grid-cols-2 gap-3">
+                {Object.entries(profile.personality.humor || {}).map(
+                  ([key, value]) => (
+                    <div key={key} className="flex justify-between bg-neutral/30 p-3 rounded-lg">
+                      <span className="font-medium">{key}:</span>
+                      <span>{value}</span>
                     </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-gray-500">No humour data captured.</div>
-              )}
+                  )
+                )}
+              </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="mt-12 flex flex-wrap justify-center gap-4">
+        <button
+          onClick={onReset}
+          className="game-btn-secondary px-6 py-3 flex items-center gap-2"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          <span>Play Again</span>
+        </button>
+        <button
+          onClick={handleFinish}
+          className="game-btn px-8 py-3 flex items-center gap-2"
+        >
+          <span>Return to Chat</span>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+        </button>
+        <button
+          onClick={download}
+          className="game-btn-secondary px-6 py-3 flex items-center gap-2"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          <span>Download Data</span>
+        </button>
       </div>
 
       <div className="mt-6 text-sm text-gray-600">

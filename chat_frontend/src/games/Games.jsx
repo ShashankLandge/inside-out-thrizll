@@ -57,8 +57,8 @@ export default function GamesPage() {
   }, [user]);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
-      <div className="w-full max-w-3xl bg-white rounded-2xl shadow-lg p-6">
+    <div className="min-h-screen bg-gradient-to-br from-neutral to-secondary/30 flex items-center justify-center p-6">
+      <div className="w-full max-w-3xl bg-white rounded-2xl shadow-lg p-8 backdrop-blur-sm bg-white/90 border border-white/50">
         <GamesHeader step={step} />
         <div className="mt-6">
           {step === 0 && (
